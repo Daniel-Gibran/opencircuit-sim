@@ -1,23 +1,23 @@
-//! Vista de impresión: exporta el circuito a SVG vectorial con tema claro.
+﻿//! Vista de impresiÃ³n: exporta el circuito a SVG vectorial con tema claro.
 //!
-//! A diferencia de la vista de la app (las placas van en fila), aquí se **apilan**
-//! verticalmente para que la figura aproveche la página y todo se lea al imprimir.
-//! Reutiliza la geometría de `draw` (orificios, curvas de cable, cuerpo de chip,
-//! display y fuente) para que la figura coincida con la simulación.
+//! A diferencia de la vista de la app (las placas van en fila), aquÃ­ se **apilan**
+//! verticalmente para que la figura aproveche la pÃ¡gina y todo se lea al imprimir.
+//! Reutiliza la geometrÃ­a de `draw` (orificios, curvas de cable, cuerpo de chip,
+//! display y fuente) para que la figura coincida con la simulaciÃ³n.
 use crate::draw;
 use crate::instr::bandas;
 use crate::model::*;
 use crate::sim::Sim;
 use eframe::egui::{pos2, vec2, Pos2, Vec2};
 
-/// Opciones de exportación.
+/// Opciones de exportaciÃ³n.
 #[derive(Clone, Debug)]
 pub struct Cfg {
     /// Solo esta placa (1..=3). `None` = todas (apiladas).
     pub placa: Option<u8>,
-    /// Ancho del dibujo en milímetros.
+    /// Ancho del dibujo en milÃ­metros.
     pub ancho_mm: f32,
-    /// Título; si es `None` se usa el nombre del circuito.
+    /// TÃ­tulo; si es `None` se usa el nombre del circuito.
     pub titulo: Option<String>,
     /// Dibuja la leyenda de colores al pie.
     pub leyenda: bool,
@@ -34,7 +34,7 @@ impl Default for Cfg {
     }
 }
 
-// ---- paleta de impresión (clara) ----
+// ---- paleta de impresiÃ³n (clara) ----
 const FONDO: &str = "#ffffff";
 const PLACA: &str = "#f3efe4";
 const RANURA: &str = "#e3ddcc";
@@ -51,7 +51,7 @@ const DISPLAY: &str = "#171a1e";
 const SEG_ON: &str = "#ff5a37";
 const SEG_OFF: &str = "#3a352f";
 
-/// Separación vertical entre placas apiladas (unidades de placa).
+/// SeparaciÃ³n vertical entre placas apiladas (unidades de placa).
 const GAP: f32 = 6.0;
 /// Margen izquierdo extra para la caja de la fuente.
 const IZQ: f32 = 9.0;
@@ -167,7 +167,7 @@ impl Lienzo {
 }
 
 // ---------------------------------------------------------------- mapeo
-/// Transforma coordenadas de placa a la lámina apilada.
+/// Transforma coordenadas de placa a la lÃ¡mina apilada.
 #[derive(Clone, Copy)]
 struct Mapa {
     ox: f32,
@@ -176,7 +176,7 @@ struct Mapa {
 }
 
 impl Mapa {
-    /// Local (x, y) de la placa `b` a la lámina.
+    /// Local (x, y) de la placa `b` a la lÃ¡mina.
     fn pb(&self, b: u8, x: f32, y: f32) -> Pos2 {
         let dy = (b.saturating_sub(1)) as f32 * (19.0 + GAP);
         pos2(self.ox + (x + IZQ) * self.s, self.oy + (y + dy) * self.s)
@@ -234,7 +234,7 @@ fn bez(a: Pos2, b: Pos2) -> Vec<Pos2> {
         .collect()
 }
 
-fn cable_pts(m: &Map, c: &Comp, hs: &[Hole]) -> Vec<Pos2> {
+fn cable_pts(m: &Mapa, c: &Comp, hs: &[Hole]) -> Vec<Pos2> {
     let (a, b) = (m.h(hs[0]), m.h(hs[1]));
     if c.puntos.is_empty() {
         return bez(a, b);
@@ -258,7 +258,7 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
     };
     let n = placas.len().max(1);
 
-    // --- geometría de la lámina ---
+    // --- geometrÃ­a de la lÃ¡mina ---
     const W: f32 = 1240.0;
     let cabecera = 92.0;
     let pie = if cfg.leyenda { 74.0 } else { 30.0 };
@@ -286,7 +286,7 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
         .filter(|c| c.tipo == Tipo::Etiqueta)
         .count();
     let sub = format!(
-        "OpenCircuit · {chips} integrados · {cables} cables · {etiquetas} etiquetas de red · 5 V · {} placa(s)",
+        "OpenCircuit Â· {chips} integrados Â· {cables} cables Â· {etiquetas} etiquetas de red Â· 5 V Â· {} placa(s)",
         n
     );
     l.text(pos2(30.0, 64.0), &sub, 13.5, TEXTO_SUAVE, 0, false);
@@ -311,8 +311,8 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
         // rieles
         for (y, signo, c) in [
             (1.0, "+", RIEL_ROJO),
-            (2.0, "−", RIEL_AZUL),
-            (17.0, "−", RIEL_AZUL),
+            (2.0, "âˆ’", RIEL_AZUL),
+            (17.0, "âˆ’", RIEL_AZUL),
             (18.0, "+", RIEL_ROJO),
         ] {
             l.line(
@@ -373,7 +373,7 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
                 );
             }
         }
-        // rótulo
+        // rÃ³tulo
         l.text(
             m.pb(b, bw / 2.0, -1.6),
             &format!("PLACA {b}"),
@@ -392,7 +392,7 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
         .filter_map(|c| c.holes().ok().map(|h| (c, h)))
         .filter(|(_, hs)| {
             hs.first().is_some_and(|h| placas.contains(&h.board()))
-                // los cables entre placas no existen en la lámina apilada
+                // los cables entre placas no existen en la lÃ¡mina apilada
                 && (cfg.placa.is_some() || hs.iter().all(|h| h.board() == hs[0].board()))
         })
         .collect();
@@ -608,7 +608,7 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
                     0.8,
                 );
                 l.text(pos2(tag.x, tag.y), &txt, size, "#ffffff", 1, true);
-                l.line(at, pos2(at.x, tag.y + size + 1.0), &col, 0.5.max(0.03 * s));
+                l.line(at, pos2(at.x, tag.y + size + 1.0), &col, 0.5f32.max(0.03 * s));
             }
             Tipo::Fuente => {
                 let bx = draw::fuente_box(c, 0);
@@ -654,7 +654,7 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
                 l.circle(tp, 0.32 * s, "#c0392b");
                 l.text(tp, "+", 0.6 * s, "#ffffff", 1, true);
                 l.circle(tm, 0.32 * s, "#1d2328");
-                l.text(tm, "−", 0.6 * s, "#ffffff", 1, true);
+                l.text(tm, "âˆ’", 0.6 * s, "#ffffff", 1, true);
                 if let Some(h0) = hs.first() {
                     l.path(&[tp, m.h(*h0)], "#c0392b", 0.18 * s, 1.0);
                 }
@@ -706,3 +706,4 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
         l.s
     )
 }
+
