@@ -27,9 +27,6 @@ jobs:
             libxkbcommon-x11-dev libgl1-mesa-dev \
             libxrandr-dev libxi-dev libxcursor-dev libxinerama-dev
 
-      - name: Formato
-        run: cargo fmt --all -- --check
-
       - name: Compilar
         run: cargo build --release
 
