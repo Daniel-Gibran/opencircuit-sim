@@ -188,11 +188,20 @@ struct Mapa {
     ox: f32,
     oy: f32,
     s: f32,
+    /// Placas que se dibujan, en orden vertical.
+    slots: [u8; 3],
+    n: u8,
 }
 
 impl Mapa {
+    /// Posicion vertical de la placa `b` (0, 1, 2...), no su numero de placa.
+    fn slot(&self, b: u8) -> f32 {
+        (0..self.n)
+            .find(|k| self.slots[*k as usize] == b)
+            .unwrap_or(0) as f32
+    }
     fn pb(&self, b: u8, x: f32, y: f32) -> Pos2 {
-        let dy = (b.saturating_sub(1)) as f32 * (19.0 + GAP);
+        let dy = self.slot(b) * (19.0 + GAP);
         pos2(self.ox + (x + IZQ) * self.s, self.oy + (y + dy) * self.s)
     }
     /// Coordenadas de placa (las de `hole_xy`, que ya traen el corrimiento horizontal).
@@ -287,6 +296,8 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
         ox: 28.0,
         oy: cabecera + 4.0 * s,
         s,
+        slots: [placas[0], *placas.get(1).unwrap_or(&placas[0]), *placas.get(2).unwrap_or(&placas[0])],
+        n: n as u8,
     };
 
     let mut l = Lienzo::new();
