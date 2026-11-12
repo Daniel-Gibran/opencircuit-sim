@@ -240,6 +240,7 @@ Más contexto sobre cómo se construyó: [docs/craft.md](docs/craft.md).
 - Solo tema oscuro.
 - El ruteo de cables es heurístico: separa y esquiva piezas, pero no empaqueta haces perfectos.
 - Los binarios de macOS y Windows no están firmados; el sistema puede mostrar un aviso.
+- El release automático incluye macOS Intel; en Apple Silicon se puede ejecutar con Rosetta o compilar desde fuente.
 - La simulación es digital a 5 V; no modela analógicos ni potenciómetros.
 
 ## Contribuir
