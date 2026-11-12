@@ -166,9 +166,8 @@ impl Lienzo {
     /// Texto vertical (de abajo hacia arriba) para etiquetas de red.
     fn text_vert(&mut self, at: Pos2, txt: &str, size: f32, color: &str, arriba: bool) {
         let rot = if arriba { -90.0 } else { 90.0 };
-        let anchor = if arriba { "start" } else { "end" };
         self.s.push_str(&format!(
-            r#"<g transform="translate({:.2},{:.2}) rotate({rot})"><text x="0" y="{:.2}" font-family="Segoe UI, Arial, sans-serif" font-size="{size:.2}" fill="{color}" text-anchor="{anchor}" font-weight="600">{}</text></g>"#,
+            r#"<g transform="translate({:.2},{:.2}) rotate({rot})"><text x="0" y="{:.2}" font-family="Segoe UI, Arial, sans-serif" font-size="{size:.2}" fill="{color}" text-anchor="start" font-weight="600">{}</text></g>"#,
             at.x,
             at.y,
             size * 0.34,
@@ -233,7 +232,13 @@ fn bez(a: Pos2, b: Pos2) -> Vec<Pos2> {
     if n.y > 0.0 {
         n = -n;
     }
-    let c = a + d * 0.5 + n * (len * 0.14);
+    // Cables casi verticales (pata -> riel): se abren hacia la izquierda y no se
+    // salen de la placa, como en un armado real.
+    let c = if d.x.abs() < d.y.abs() * 0.5 {
+        a + d * 0.5 + vec2(-len * 0.08, 0.0)
+    } else {
+        a + d * 0.5 + n * (len * 0.14)
+    };
     (0..=24)
         .map(|i| {
             let t = i as f32 / 24.0;
