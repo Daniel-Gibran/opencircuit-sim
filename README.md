@@ -2,7 +2,7 @@
 
 **Simulador de circuitos sobre protoboard** con componentes físicos, cables, compuertas 74HC, display de 7 segmentos y guía de armado paso a paso. Incluye integración MCP para que agentes de IA armen y editen circuitos.
 
-[![CI](https://github.com/Daniel-Gibran/opencircuit-sim/actions/workflows/ci.yml/badge.svg)](https://github.com/Daniel-Gibran/opencircuit-sim/actions/workflows/ci.yml)
+[![CI](https://github.com/Gibran-AlvarezA/opencircuit-sim/actions/workflows/ci.yml/badge.svg)](https://github.com/Gibran-AlvarezA/opencircuit-sim/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ![Rust](https://img.shields.io/badge/rust-stable-orange)
 
@@ -61,7 +61,7 @@ sudo dnf install gcc pkg-config libxkbcommon-devel wayland-devel \
 ## Compilar y ejecutar
 
 ```bash
-git clone https://github.com/Daniel-Gibran/opencircuit-sim.git
+git clone https://github.com/Gibran-AlvarezA/opencircuit-sim.git
 cd opencircuit-sim
 
 cargo run --release
