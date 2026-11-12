@@ -405,13 +405,12 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
                 l.line(b, d, PATA, 0.12 * s);
                 let col = hex(draw::color(&c.color_or("rojo")));
                 let on = sim.led(&c.id).is_some_and(|x| x.on);
-                l.circle_st(
-                    d,
-                    0.62 * s,
-                    if on { col.clone() } else { sombra(&col, 0.55) },
-                    &sombra(&col, 0.35),
-                    0.04 * s,
-                );
+                let relleno = if on {
+                    col.clone()
+                } else {
+                    sombra(&col, 0.55)
+                };
+                l.circle_st(d, 0.62 * s, &relleno, &sombra(&col, 0.35), 0.04 * s);
                 if on {
                     l.circle(d, 0.3 * s, "#ffffffcc");
                 } else {
@@ -631,7 +630,7 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
     let alto_mm = mm * H / W;
     format!(
         r#"<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="{mm:.1f}mm" height="{alto_mm:.1f}mm" viewBox="0 0 {W:.2} {H:.2}">
+<svg xmlns="http://www.w3.org/2000/svg" width="{mm:.1}mm" height="{alto_mm:.1}mm" viewBox="0 0 {W:.2} {H:.2}">
 <rect x="0" y="0" width="{W:.2}" height="{H:.2}" fill="{FONDO}"/>
 {}
 </svg>"#,
