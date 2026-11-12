@@ -1,23 +1,25 @@
-﻿//! Vista de impresiÃ³n: exporta el circuito a SVG vectorial con tema claro.
+﻿//! Vista de impresion: exporta el circuito a SVG vectorial con tema claro.
 //!
-//! A diferencia de la vista de la app (las placas van en fila), aquÃ­ se **apilan**
-//! verticalmente para que la figura aproveche la pÃ¡gina y todo se lea al imprimir.
-//! Reutiliza la geometrÃ­a de `draw` (orificios, curvas de cable, cuerpo de chip,
-//! display y fuente) para que la figura coincida con la simulaciÃ³n.
+//! A diferencia de la vista de la app (las placas van en fila), aqui se **apilan**
+//! verticalmente para que la figura aproveche la pagina. Reutiliza la geometria de
+//! `draw` (orificios, curvas de cable, cuerpo de chip, display y fuente).
+//!
+//! Nota: este archivo se mantiene en ASCII a proposito (los textos con acentos se
+//! reciben por CLI) para que el SVG no dependa de la codificacion del editor.
 use crate::draw;
 use crate::instr::bandas;
 use crate::model::*;
 use crate::sim::Sim;
 use eframe::egui::{pos2, vec2, Pos2, Vec2};
 
-/// Opciones de exportaciÃ³n.
+/// Opciones de exportacion.
 #[derive(Clone, Debug)]
 pub struct Cfg {
     /// Solo esta placa (1..=3). `None` = todas (apiladas).
     pub placa: Option<u8>,
-    /// Ancho del dibujo en milÃ­metros.
+    /// Ancho del dibujo en milimetros.
     pub ancho_mm: f32,
-    /// TÃ­tulo; si es `None` se usa el nombre del circuito.
+    /// Titulo; si es `None` se usa el nombre del circuito.
     pub titulo: Option<String>,
     /// Dibuja la leyenda de colores al pie.
     pub leyenda: bool,
@@ -34,7 +36,7 @@ impl Default for Cfg {
     }
 }
 
-// ---- paleta de impresiÃ³n (clara) ----
+// ---- paleta de impresion (clara) ----
 const FONDO: &str = "#ffffff";
 const PLACA: &str = "#f3efe4";
 const RANURA: &str = "#e3ddcc";
@@ -51,8 +53,8 @@ const DISPLAY: &str = "#171a1e";
 const SEG_ON: &str = "#ff5a37";
 const SEG_OFF: &str = "#3a352f";
 
-/// SeparaciÃ³n vertical entre placas apiladas (unidades de placa).
-const GAP: f32 = 6.0;
+/// Separacion vertical entre placas apiladas (unidades de placa).
+const GAP: f32 = 7.0;
 /// Margen izquierdo extra para la caja de la fuente.
 const IZQ: f32 = 9.0;
 
@@ -75,7 +77,6 @@ fn sombra(c: &str, f: f32) -> String {
     )
 }
 
-// ---------------------------------------------------------------- lienzo
 struct Lienzo {
     s: String,
 }
@@ -147,7 +148,7 @@ impl Lienzo {
             r#"<path d="{d}" fill="none" stroke="{color}" stroke-width="{w:.2}" stroke-opacity="{op:.2}" stroke-linecap="round" stroke-linejoin="round"/>"#
         ));
     }
-    /// Texto con anclaje: 0 = izquierda, 1 = centro, 2 = derecha.
+    /// Texto horizontal. anchor: 0 = izquierda, 1 = centro, 2 = derecha.
     fn text(&mut self, at: Pos2, txt: &str, size: f32, color: &str, anchor: u8, bold: bool) {
         let a = match anchor {
             1 => "middle",
@@ -155,19 +156,34 @@ impl Lienzo {
             _ => "start",
         };
         let weight = if bold { " font-weight=\"600\"" } else { "" };
-        let t = txt
-            .replace('&', "&amp;")
-            .replace('<', "&lt;")
-            .replace('>', "&gt;");
         self.s.push_str(&format!(
-            r#"<text x="{:.2}" y="{:.2}" font-family="Segoe UI, Arial, sans-serif" font-size="{size:.2}" fill="{color}" text-anchor="{a}"{weight}>{t}</text>"#,
-            at.x, at.y
+            r#"<text x="{:.2}" y="{:.2}" font-family="Segoe UI, Arial, sans-serif" font-size="{size:.2}" fill="{color}" text-anchor="{a}"{weight}>{}</text>"#,
+            at.x,
+            at.y,
+            esc(txt)
+        ));
+    }
+    /// Texto vertical (de abajo hacia arriba) para etiquetas de red.
+    fn text_vert(&mut self, at: Pos2, txt: &str, size: f32, color: &str, arriba: bool) {
+        let rot = if arriba { -90.0 } else { 90.0 };
+        let anchor = if arriba { "start" } else { "end" };
+        self.s.push_str(&format!(
+            r#"<g transform="translate({:.2},{:.2}) rotate({rot})"><text x="0" y="{:.2}" font-family="Segoe UI, Arial, sans-serif" font-size="{size:.2}" fill="{color}" text-anchor="{anchor}" font-weight="600">{}</text></g>"#,
+            at.x,
+            at.y,
+            size * 0.34,
+            esc(txt)
         ));
     }
 }
 
-// ---------------------------------------------------------------- mapeo
-/// Transforma coordenadas de placa a la lÃ¡mina apilada.
+fn esc(t: &str) -> String {
+    t.replace('&', "&amp;")
+        .replace('<', "&lt;")
+        .replace('>', "&gt;")
+}
+
+/// Transforma coordenadas de placa a la lamina apilada.
 #[derive(Clone, Copy)]
 struct Mapa {
     ox: f32,
@@ -176,22 +192,18 @@ struct Mapa {
 }
 
 impl Mapa {
-    /// Local (x, y) de la placa `b` a la lÃ¡mina.
     fn pb(&self, b: u8, x: f32, y: f32) -> Pos2 {
         let dy = (b.saturating_sub(1)) as f32 * (19.0 + GAP);
         pos2(self.ox + (x + IZQ) * self.s, self.oy + (y + dy) * self.s)
     }
     /// Coordenadas de placa (las de `hole_xy`, que ya traen el corrimiento horizontal).
     fn p(&self, x: f32, y: f32) -> Pos2 {
-        let b = (x / BOARD_OFFSET).floor() as u8 + 1;
+        let b = ((x / BOARD_OFFSET).floor() as i32).max(0) as u8 + 1;
         self.pb(b, x - (b - 1) as f32 * BOARD_OFFSET, y)
     }
     fn h(&self, h: Hole) -> Pos2 {
         let (x, y) = hole_xy(h);
         self.p(x, y)
-    }
-    fn board_w(&self, columnas: i32) -> f32 {
-        board_width(columnas) * self.s
     }
 }
 
@@ -221,7 +233,7 @@ fn bez(a: Pos2, b: Pos2) -> Vec<Pos2> {
     if n.y > 0.0 {
         n = -n;
     }
-    let c = a + d * 0.5 + n * (len * 0.20);
+    let c = a + d * 0.5 + n * (len * 0.14);
     (0..=24)
         .map(|i| {
             let t = i as f32 / 24.0;
@@ -257,19 +269,18 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
         None => (1..=tableros).collect(),
     };
     let n = placas.len().max(1);
-
-    // --- geometrÃ­a de la lÃ¡mina ---
-    const W: f32 = 1240.0;
-    let cabecera = 92.0;
-    let pie = if cfg.leyenda { 74.0 } else { 30.0 };
     let columnas = circ.columnas;
+
+    const W: f32 = 1240.0;
+    let cabecera = 96.0;
+    let pie = if cfg.leyenda { 78.0 } else { 32.0 };
     let ancho_u = board_width(columnas) + IZQ + 3.0;
-    let alto_u = n as f32 * 19.0 + (n as f32 - 1.0) * GAP + 4.0;
-    let s = (W - 60.0) / ancho_u;
+    let alto_u = n as f32 * 19.0 + (n as f32 - 1.0) * GAP + 5.0;
+    let s = (W - 56.0) / ancho_u;
     let alto_px = cabecera + alto_u * s + pie;
     let m = Mapa {
-        ox: 30.0,
-        oy: cabecera + 3.0 * s,
+        ox: 28.0,
+        oy: cabecera + 4.0 * s,
         s,
     };
 
@@ -277,7 +288,7 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
 
     // ---------- cabecera ----------
     let titulo = cfg.titulo.clone().unwrap_or_else(|| circ.nombre.clone());
-    l.text(pos2(30.0, 42.0), &titulo, 27.0, TEXTO, 0, true);
+    l.text(pos2(28.0, 44.0), &titulo, 26.0, TEXTO, 0, true);
     let chips = circ.componentes.iter().filter(|c| c.tipo == Tipo::Chip).count();
     let cables = circ.componentes.iter().filter(|c| c.tipo == Tipo::Cable).count();
     let etiquetas = circ
@@ -286,44 +297,30 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
         .filter(|c| c.tipo == Tipo::Etiqueta)
         .count();
     let sub = format!(
-        "OpenCircuit Â· {chips} integrados Â· {cables} cables Â· {etiquetas} etiquetas de red Â· 5 V Â· {} placa(s)",
+        "OpenCircuit  |  {chips} integrados  |  {cables} cables  |  {etiquetas} etiquetas de red  |  5 V  |  {} placa(s)",
         n
     );
-    l.text(pos2(30.0, 64.0), &sub, 13.5, TEXTO_SUAVE, 0, false);
+    l.text(pos2(28.0, 66.0), &sub, 13.0, TEXTO_SUAVE, 0, false);
+    l.line(pos2(28.0, 78.0), pos2(W - 28.0, 78.0), "#e5e7eb", 1.0);
 
     // ---------- placas ----------
     for (i, &b) in placas.iter().enumerate() {
         let dy = i as f32 * (19.0 + GAP);
         let bw = board_width(columnas);
-        let (x0, y0) = (m.ox + IZQ * s, m.oy + dy * s);
+        let x0 = m.ox + IZQ * s;
+        let y0 = m.oy + dy * s;
         let w = bw * s;
-        let h = 19.0 * s;
-        // cuerpo + ranura
-        l.rect(x0, y0, w, h, 0.35 * s, PLACA);
-        l.rect(
-            x0,
-            y0 + 9.15 * s,
-            w,
-            0.7 * s,
-            0.0,
-            RANURA,
-        );
-        // rieles
+        l.rect(x0, y0, w, 19.0 * s, 0.35 * s, PLACA);
+        l.rect(x0, y0 + 9.15 * s, w, 0.7 * s, 0.0, RANURA);
         for (y, signo, c) in [
             (1.0, "+", RIEL_ROJO),
-            (2.0, "âˆ’", RIEL_AZUL),
-            (17.0, "âˆ’", RIEL_AZUL),
+            (2.0, "-", RIEL_AZUL),
+            (17.0, "-", RIEL_AZUL),
             (18.0, "+", RIEL_ROJO),
         ] {
-            l.line(
-                m.pb(b, 0.6, y),
-                m.pb(b, bw - 0.6, y),
-                c,
-                0.14 * s,
-            );
-            l.text(m.pb(b, -0.35, y), signo, 0.85 * s, c, 1, true);
+            l.line(m.pb(b, 0.6, y), m.pb(b, bw - 0.6, y), c, 0.14 * s);
+            l.text(m.pb(b, -0.35, y), signo, 0.8 * s, c, 1, true);
         }
-        // filas
         for row in 0..10u8 {
             let (_, y) = hole_xy(Hole::Main {
                 board: b,
@@ -331,15 +328,14 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
                 col: 1,
             });
             l.text(
-                m.pb(b, -0.35, y - 0.06),
+                m.pb(b, -0.4, y - 0.06),
                 &((b'a' + row) as char).to_string(),
-                0.5 * s,
+                0.48 * s,
                 TEXTO_SUAVE,
                 1,
                 false,
             );
         }
-        // columnas
         for col in 1..=columnas {
             if col != 1 && col % 5 != 0 {
                 continue;
@@ -348,14 +344,13 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
                 l.text(
                     m.pb(b, col as f32 + 1.0, y),
                     &col.to_string(),
-                    0.42 * s,
+                    0.4 * s,
                     TEXTO_SUAVE,
                     1,
                     false,
                 );
             }
         }
-        // orificios
         for col in 1..=columnas {
             for row in 0..10u8 {
                 l.circle(m.h(Hole::Main { board: b, row, col }), 0.15 * s, HOYO);
@@ -373,9 +368,8 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
                 );
             }
         }
-        // rÃ³tulo
         l.text(
-            m.pb(b, bw / 2.0, -1.6),
+            m.pb(b, bw / 2.0, -1.7),
             &format!("PLACA {b}"),
             0.8 * s,
             "#8a6d1f",
@@ -390,10 +384,10 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
         .iter()
         .filter(|c| !circ.oculta(c))
         .filter_map(|c| c.holes().ok().map(|h| (c, h)))
-        .filter(|(_, hs)| {
+        .filter(|(c, hs)| {
             hs.first().is_some_and(|h| placas.contains(&h.board()))
-                // los cables entre placas no existen en la lÃ¡mina apilada
-                && (cfg.placa.is_some() || hs.iter().all(|h| h.board() == hs[0].board()))
+                && (!matches!(c.tipo, Tipo::Cable)
+                    || hs.iter().all(|h| h.board() == hs[0].board()))
         })
         .collect();
     items.sort_by_key(|(c, _)| match c.tipo {
@@ -404,7 +398,6 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
         Tipo::Etiqueta => 4,
     });
 
-    // cables primero
     for (c, hs) in &items {
         if c.tipo != Tipo::Cable {
             continue;
@@ -421,7 +414,6 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
         }
     }
 
-    // luego componentes
     for (c, hs) in &items {
         if c.tipo == Tipo::Cable {
             continue;
@@ -592,23 +584,17 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
                     Some(n) => hex(draw::color(n)),
                     None => hex(draw::net_color(&txt)),
                 };
-                // Etiqueta compacta y escalonada: no se enciman entre columnas vecinas.
-                let fila = if hs[0].name().len() % 2 == 0 { 0.0 } else { 0.55 * s };
-                let size = 0.34 * s;
-                let w = (txt.chars().count() as f32 * size * 0.60).max(9.0);
-                let tag = pos2(at.x, at.y - 0.75 * s - fila);
-                l.rect_st(
-                    tag.x - w / 2.0 - 1.5,
-                    tag.y - size,
-                    w + 3.0,
-                    size + 3.0,
-                    2.0,
-                    &col,
-                    &sombra(&col, 0.65),
-                    0.8,
-                );
-                l.text(pos2(tag.x, tag.y), &txt, size, "#ffffff", 1, true);
-                l.line(at, pos2(at.x, tag.y + size + 1.0), &col, 0.5f32.max(0.03 * s));
+                // Etiqueta vertical pegada al orificio: legible aunque haya una por columna.
+                let arriba = match hs[0] {
+                    Hole::Main { row, .. } => row <= 4,
+                    Hole::Rail { top, .. } => top,
+                };
+                let size = (0.62 * s).min(15.0);
+                let signo = if arriba { -1.0 } else { 1.0 };
+                let base = at + vec2(0.0, signo * 0.55 * s);
+                l.line(at, base, &col, 0.05 * s);
+                l.circle(at, 0.1 * s, &col);
+                l.text_vert(base, &txt, size, &col, arriba);
             }
             Tipo::Fuente => {
                 let bx = draw::fuente_box(c, 0);
@@ -636,7 +622,7 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
                 l.text(
                     pos2(x0.x + 0.4 * s, x0.y + 2.2 * s),
                     &format!("{:.1} V", c.voltios()),
-                    0.85 * s,
+                    0.82 * s,
                     "#49d17a",
                     0,
                     false,
@@ -654,7 +640,7 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
                 l.circle(tp, 0.32 * s, "#c0392b");
                 l.text(tp, "+", 0.6 * s, "#ffffff", 1, true);
                 l.circle(tm, 0.32 * s, "#1d2328");
-                l.text(tm, "âˆ’", 0.6 * s, "#ffffff", 1, true);
+                l.text(tm, "-", 0.6 * s, "#ffffff", 1, true);
                 if let Some(h0) = hs.first() {
                     l.path(&[tp, m.h(*h0)], "#c0392b", 0.18 * s, 1.0);
                 }
@@ -668,8 +654,8 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
 
     // ---------- leyenda ----------
     if cfg.leyenda {
-        let y = alto_px - 46.0;
-        l.text(pos2(30.0, y), "Colores de red", 13.0, TEXTO, 0, true);
+        let y = alto_px - 52.0;
+        l.text(pos2(28.0, y), "Colores de red", 12.5, TEXTO, 0, true);
         let mut nets: Vec<String> = Vec::new();
         for c in &circ.componentes {
             match c.tipo {
@@ -679,18 +665,18 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
         }
         nets.sort();
         nets.dedup();
-        let mut x = 30.0;
+        let mut x = 28.0;
         let mut row = 0;
-        for n in nets.iter().take(60) {
-            let w = 24.0 + 6.6 * n.chars().count() as f32;
-            if x + w > W - 30.0 {
-                x = 30.0;
+        for n in nets.iter().take(64) {
+            let w = 24.0 + 6.4 * n.chars().count() as f32;
+            if x + w > W - 28.0 {
+                x = 28.0;
                 row += 1;
             }
-            let yy = y + 18.0 + row as f32 * 17.0;
+            let yy = y + 17.0 + row as f32 * 16.0;
             let col = hex(draw::net_color(n));
-            l.line(pos2(x, yy - 3.5), pos2(x + 15.0, yy - 3.5), &col, 3.6);
-            l.text(pos2(x + 20.0, yy), n, 10.5, TEXTO_SUAVE, 0, false);
+            l.line(pos2(x, yy - 3.5), pos2(x + 14.0, yy - 3.5), &col, 3.4);
+            l.text(pos2(x + 19.0, yy), n, 10.0, TEXTO_SUAVE, 0, false);
             x += w;
         }
     }
@@ -706,4 +692,3 @@ pub fn exportar(circ: &Circuito, sim: &Sim, cfg: &Cfg) -> String {
         l.s
     )
 }
-
