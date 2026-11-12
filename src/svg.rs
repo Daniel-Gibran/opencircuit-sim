@@ -233,31 +233,17 @@ fn dir(a: Pos2, b: Pos2) -> (Vec2, f32) {
 
 fn bez(a: Pos2, b: Pos2) -> Vec<Pos2> {
     let d = b - a;
-    let len = d.length();
-    if len < 0.5 {
+    // Ruteo ortogonal (como un cable tendido en la protoboard): un tramo recto si
+    // los orificios comparten fila o columna, y una sola esquina si no.
+    if d.x.abs() < 0.35 || d.y.abs() < 0.35 {
         return vec![a, b];
     }
-    let mut n = vec2(d.y, -d.x) / len;
-    if n.y > 0.0 {
-        n = -n;
-    }
-    // Cables casi verticales (pata -> riel): se abren hacia la izquierda y no se
-    // salen de la placa, como en un armado real.
-    let c = if d.x.abs() < d.y.abs() * 0.5 {
-        a + d * 0.5 + vec2(-len * 0.08, 0.0)
+    let codo = if d.x.abs() >= d.y.abs() {
+        pos2(b.x, a.y)
     } else {
-        a + d * 0.5 + n * (len * 0.14)
+        pos2(a.x, b.y)
     };
-    (0..=24)
-        .map(|i| {
-            let t = i as f32 / 24.0;
-            let u = 1.0 - t;
-            pos2(
-                u * u * a.x + 2.0 * u * t * c.x + t * t * b.x,
-                u * u * a.y + 2.0 * u * t * c.y + t * t * b.y,
-            )
-        })
-        .collect()
+    vec![a, codo, b]
 }
 
 fn cable_pts(m: &Mapa, c: &Comp, hs: &[Hole]) -> Vec<Pos2> {
