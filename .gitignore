@@ -1,0 +1,9 @@
+/target
+/shots
+*.log
+.env
+.env.*
+.DS_Store
+.idea/
+.vscode/
+instrucciones_armado.md

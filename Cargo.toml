@@ -1,0 +1,22 @@
+[package]
+name = "opencircuit"
+version = "0.1.0"
+edition = "2021"
+description = "Simulador de circuitos sobre protoboard con componentes físicos, guía de armado y MCP"
+license = "MIT"
+repository = "https://github.com/Daniel-Gibran/opencircuit-sim"
+readme = "README.md"
+keywords = ["simulator", "electronics", "protoboard", "egui", "mcp"]
+categories = ["simulation", "graphics", "education"]
+
+[dependencies]
+eframe = "0.31"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+image = { version = "0.25", default-features = false, features = ["png"] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+winit = "0.30"
+
+[profile.dev.package."*"]
+opt-level = 2

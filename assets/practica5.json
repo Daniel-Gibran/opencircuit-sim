@@ -1,0 +1,1896 @@
+{
+  "nombre": "Práctica 5 — detector 2 de 5 (12 CI)",
+  "columnas": 60,
+  "tableros": 3,
+  "componentes": [
+    {
+      "id": "F1",
+      "tipo": "fuente",
+      "pines": [
+        "t+1",
+        "t-1"
+      ],
+      "valor": 5.0
+    },
+    {
+      "id": "U1",
+      "tipo": "chip",
+      "pines": [
+        "f1"
+      ],
+      "modelo": "74HC08"
+    },
+    {
+      "id": "U2",
+      "tipo": "chip",
+      "pines": [
+        "f8"
+      ],
+      "modelo": "74HC08"
+    },
+    {
+      "id": "U3",
+      "tipo": "chip",
+      "pines": [
+        "f15"
+      ],
+      "modelo": "74HC08"
+    },
+    {
+      "id": "U4",
+      "tipo": "chip",
+      "pines": [
+        "f22"
+      ],
+      "modelo": "74HC08"
+    },
+    {
+      "id": "U5",
+      "tipo": "chip",
+      "pines": [
+        "f29"
+      ],
+      "modelo": "74HC08"
+    },
+    {
+      "id": "U6",
+      "tipo": "chip",
+      "pines": [
+        "f36"
+      ],
+      "modelo": "74HC08"
+    },
+    {
+      "id": "U9",
+      "tipo": "chip",
+      "pines": [
+        "f1@2"
+      ],
+      "modelo": "74HC32"
+    },
+    {
+      "id": "U10",
+      "tipo": "chip",
+      "pines": [
+        "f8@2"
+      ],
+      "modelo": "74HC32"
+    },
+    {
+      "id": "U11",
+      "tipo": "chip",
+      "pines": [
+        "f15@2"
+      ],
+      "modelo": "74HC32"
+    },
+    {
+      "id": "U12",
+      "tipo": "chip",
+      "pines": [
+        "f22@2"
+      ],
+      "modelo": "74HC32"
+    },
+    {
+      "id": "U13",
+      "tipo": "chip",
+      "pines": [
+        "f29@2"
+      ],
+      "modelo": "74HC32"
+    },
+    {
+      "id": "U14",
+      "tipo": "chip",
+      "pines": [
+        "f43"
+      ],
+      "modelo": "74HC04"
+    },
+    {
+      "id": "S1",
+      "tipo": "interruptor",
+      "pines": [
+        "h1@3",
+        "h2@3"
+      ]
+    },
+    {
+      "id": "R1",
+      "tipo": "resistencia",
+      "pines": [
+        "i2@3",
+        "b-2@3"
+      ],
+      "valor": 10000.0
+    },
+    {
+      "id": "W1",
+      "tipo": "cable",
+      "pines": [
+        "j1@3",
+        "t+3@3"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "S2",
+      "tipo": "interruptor",
+      "pines": [
+        "h4@3",
+        "h5@3"
+      ]
+    },
+    {
+      "id": "R2",
+      "tipo": "resistencia",
+      "pines": [
+        "i5@3",
+        "b-5@3"
+      ],
+      "valor": 10000.0
+    },
+    {
+      "id": "W2",
+      "tipo": "cable",
+      "pines": [
+        "j4@3",
+        "t+6@3"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "S3",
+      "tipo": "interruptor",
+      "pines": [
+        "h7@3",
+        "h8@3"
+      ]
+    },
+    {
+      "id": "R3",
+      "tipo": "resistencia",
+      "pines": [
+        "i8@3",
+        "b-8@3"
+      ],
+      "valor": 10000.0
+    },
+    {
+      "id": "W3",
+      "tipo": "cable",
+      "pines": [
+        "j7@3",
+        "t+9@3"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "S4",
+      "tipo": "interruptor",
+      "pines": [
+        "h10@3",
+        "h11@3"
+      ]
+    },
+    {
+      "id": "R4",
+      "tipo": "resistencia",
+      "pines": [
+        "i11@3",
+        "b-11@3"
+      ],
+      "valor": 10000.0
+    },
+    {
+      "id": "W4",
+      "tipo": "cable",
+      "pines": [
+        "j10@3",
+        "t+12@3"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "S5",
+      "tipo": "interruptor",
+      "pines": [
+        "h13@3",
+        "h14@3"
+      ]
+    },
+    {
+      "id": "R5",
+      "tipo": "resistencia",
+      "pines": [
+        "i14@3",
+        "b-14@3"
+      ],
+      "valor": 10000.0
+    },
+    {
+      "id": "W5",
+      "tipo": "cable",
+      "pines": [
+        "j13@3",
+        "t+15@3"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "L1",
+      "tipo": "etiqueta",
+      "pines": [
+        "j2@3"
+      ],
+      "nombre": "A"
+    },
+    {
+      "id": "L2",
+      "tipo": "etiqueta",
+      "pines": [
+        "j5@3"
+      ],
+      "nombre": "B"
+    },
+    {
+      "id": "L3",
+      "tipo": "etiqueta",
+      "pines": [
+        "j8@3"
+      ],
+      "nombre": "C"
+    },
+    {
+      "id": "L4",
+      "tipo": "etiqueta",
+      "pines": [
+        "j11@3"
+      ],
+      "nombre": "D"
+    },
+    {
+      "id": "L5",
+      "tipo": "etiqueta",
+      "pines": [
+        "j14@3"
+      ],
+      "nombre": "E"
+    },
+    {
+      "id": "R6",
+      "tipo": "resistencia",
+      "pines": [
+        "i20@3",
+        "i21@3"
+      ],
+      "valor": 470.0
+    },
+    {
+      "id": "L6",
+      "tipo": "etiqueta",
+      "pines": [
+        "j21@3"
+      ],
+      "nombre": "S2"
+    },
+    {
+      "id": "R7",
+      "tipo": "resistencia",
+      "pines": [
+        "i22@3",
+        "i23@3"
+      ],
+      "valor": 470.0
+    },
+    {
+      "id": "L7",
+      "tipo": "etiqueta",
+      "pines": [
+        "j23@3"
+      ],
+      "nombre": "S"
+    },
+    {
+      "id": "R8",
+      "tipo": "resistencia",
+      "pines": [
+        "i24@3",
+        "i25@3"
+      ],
+      "valor": 470.0
+    },
+    {
+      "id": "L8",
+      "tipo": "etiqueta",
+      "pines": [
+        "j25@3"
+      ],
+      "nombre": "S"
+    },
+    {
+      "id": "R9",
+      "tipo": "resistencia",
+      "pines": [
+        "i26@3",
+        "i27@3"
+      ],
+      "valor": 470.0
+    },
+    {
+      "id": "L9",
+      "tipo": "etiqueta",
+      "pines": [
+        "j27@3"
+      ],
+      "nombre": "S2"
+    },
+    {
+      "id": "R10",
+      "tipo": "resistencia",
+      "pines": [
+        "i28@3",
+        "i29@3"
+      ],
+      "valor": 470.0
+    },
+    {
+      "id": "L10",
+      "tipo": "etiqueta",
+      "pines": [
+        "j29@3"
+      ],
+      "nombre": "S2"
+    },
+    {
+      "id": "R11",
+      "tipo": "resistencia",
+      "pines": [
+        "i30@3",
+        "i31@3"
+      ],
+      "valor": 470.0
+    },
+    {
+      "id": "L11",
+      "tipo": "etiqueta",
+      "pines": [
+        "j31@3"
+      ],
+      "nombre": "S2"
+    },
+    {
+      "id": "R12",
+      "tipo": "resistencia",
+      "pines": [
+        "i32@3",
+        "i33@3"
+      ],
+      "valor": 470.0
+    },
+    {
+      "id": "L12",
+      "tipo": "etiqueta",
+      "pines": [
+        "j33@3"
+      ],
+      "nombre": "S2"
+    },
+    {
+      "id": "DS1",
+      "tipo": "display",
+      "pines": [
+        "h20@3",
+        "h22@3",
+        "h24@3",
+        "h26@3",
+        "h28@3",
+        "h30@3",
+        "h32@3",
+        "h34@3"
+      ]
+    },
+    {
+      "id": "W6",
+      "tipo": "cable",
+      "pines": [
+        "i34@3",
+        "b-34@3"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "R13",
+      "tipo": "resistencia",
+      "pines": [
+        "i38@3",
+        "i39@3"
+      ],
+      "valor": 470.0
+    },
+    {
+      "id": "L13",
+      "tipo": "etiqueta",
+      "pines": [
+        "j38@3"
+      ],
+      "nombre": "F"
+    },
+    {
+      "id": "D1",
+      "tipo": "led",
+      "pines": [
+        "h39@3",
+        "h41@3"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "W7",
+      "tipo": "cable",
+      "pines": [
+        "i41@3",
+        "b-41@3"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "R14",
+      "tipo": "resistencia",
+      "pines": [
+        "i44@3",
+        "i45@3"
+      ],
+      "valor": 470.0
+    },
+    {
+      "id": "L14",
+      "tipo": "etiqueta",
+      "pines": [
+        "j44@3"
+      ],
+      "nombre": "T"
+    },
+    {
+      "id": "D2",
+      "tipo": "led",
+      "pines": [
+        "h45@3",
+        "h47@3"
+      ],
+      "color": "verde"
+    },
+    {
+      "id": "W8",
+      "tipo": "cable",
+      "pines": [
+        "i47@3",
+        "b-47@3"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "W9",
+      "tipo": "cable",
+      "pines": [
+        "t+60@1",
+        "b+60@1"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "W10",
+      "tipo": "cable",
+      "pines": [
+        "t-60@1",
+        "b-60@1"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "W11",
+      "tipo": "cable",
+      "pines": [
+        "t+60@2",
+        "b+60@2"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "W12",
+      "tipo": "cable",
+      "pines": [
+        "t-60@2",
+        "b-60@2"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "W13",
+      "tipo": "cable",
+      "pines": [
+        "t+60@3",
+        "b+60@3"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "W14",
+      "tipo": "cable",
+      "pines": [
+        "t-60@3",
+        "b-60@3"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "W15",
+      "tipo": "cable",
+      "pines": [
+        "t+58@1",
+        "t+1@2"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "W16",
+      "tipo": "cable",
+      "pines": [
+        "t-58@1",
+        "t-1@2"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "W17",
+      "tipo": "cable",
+      "pines": [
+        "t+59@1",
+        "t+1@3"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "W18",
+      "tipo": "cable",
+      "pines": [
+        "t-59@1",
+        "t-1@3"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "W19",
+      "tipo": "cable",
+      "pines": [
+        "d1",
+        "t+9@1"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "W20",
+      "tipo": "cable",
+      "pines": [
+        "g7",
+        "b-9@1"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "W21",
+      "tipo": "cable",
+      "pines": [
+        "d8",
+        "t+16@1"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "W22",
+      "tipo": "cable",
+      "pines": [
+        "g14",
+        "b-16@1"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "W23",
+      "tipo": "cable",
+      "pines": [
+        "d15",
+        "t+23@1"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "W24",
+      "tipo": "cable",
+      "pines": [
+        "g21",
+        "b-23@1"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "W25",
+      "tipo": "cable",
+      "pines": [
+        "d22",
+        "t+30@1"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "W26",
+      "tipo": "cable",
+      "pines": [
+        "g28",
+        "b-30@1"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "W27",
+      "tipo": "cable",
+      "pines": [
+        "d29",
+        "t+37@1"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "W28",
+      "tipo": "cable",
+      "pines": [
+        "g35",
+        "b-37@1"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "W29",
+      "tipo": "cable",
+      "pines": [
+        "d36",
+        "t+44@1"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "W30",
+      "tipo": "cable",
+      "pines": [
+        "g42",
+        "b-44@1"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "W31",
+      "tipo": "cable",
+      "pines": [
+        "d43",
+        "t+51@1"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "W32",
+      "tipo": "cable",
+      "pines": [
+        "g49",
+        "b-51@1"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "W33",
+      "tipo": "cable",
+      "pines": [
+        "d1@2",
+        "t+9@2"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "W34",
+      "tipo": "cable",
+      "pines": [
+        "g7@2",
+        "b-9@2"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "W35",
+      "tipo": "cable",
+      "pines": [
+        "d8@2",
+        "t+16@2"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "W36",
+      "tipo": "cable",
+      "pines": [
+        "g14@2",
+        "b-16@2"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "W37",
+      "tipo": "cable",
+      "pines": [
+        "d15@2",
+        "t+23@2"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "W38",
+      "tipo": "cable",
+      "pines": [
+        "g21@2",
+        "b-23@2"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "W39",
+      "tipo": "cable",
+      "pines": [
+        "d22@2",
+        "t+30@2"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "W40",
+      "tipo": "cable",
+      "pines": [
+        "g28@2",
+        "b-30@2"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "W41",
+      "tipo": "cable",
+      "pines": [
+        "d29@2",
+        "t+37@2"
+      ],
+      "color": "rojo"
+    },
+    {
+      "id": "W42",
+      "tipo": "cable",
+      "pines": [
+        "g35@2",
+        "b-37@2"
+      ],
+      "color": "negro"
+    },
+    {
+      "id": "L15",
+      "tipo": "etiqueta",
+      "pines": [
+        "g1"
+      ],
+      "nombre": "A"
+    },
+    {
+      "id": "L16",
+      "tipo": "etiqueta",
+      "pines": [
+        "g4"
+      ],
+      "nombre": "A"
+    },
+    {
+      "id": "L17",
+      "tipo": "etiqueta",
+      "pines": [
+        "d6"
+      ],
+      "nombre": "A"
+    },
+    {
+      "id": "L18",
+      "tipo": "etiqueta",
+      "pines": [
+        "d3"
+      ],
+      "nombre": "A"
+    },
+    {
+      "id": "L19",
+      "tipo": "etiqueta",
+      "pines": [
+        "g2"
+      ],
+      "nombre": "B"
+    },
+    {
+      "id": "L20",
+      "tipo": "etiqueta",
+      "pines": [
+        "g8"
+      ],
+      "nombre": "B"
+    },
+    {
+      "id": "L21",
+      "tipo": "etiqueta",
+      "pines": [
+        "g11"
+      ],
+      "nombre": "B"
+    },
+    {
+      "id": "L22",
+      "tipo": "etiqueta",
+      "pines": [
+        "d13"
+      ],
+      "nombre": "B"
+    },
+    {
+      "id": "L23",
+      "tipo": "etiqueta",
+      "pines": [
+        "g5"
+      ],
+      "nombre": "C"
+    },
+    {
+      "id": "L24",
+      "tipo": "etiqueta",
+      "pines": [
+        "g9"
+      ],
+      "nombre": "C"
+    },
+    {
+      "id": "L25",
+      "tipo": "etiqueta",
+      "pines": [
+        "d10"
+      ],
+      "nombre": "C"
+    },
+    {
+      "id": "L26",
+      "tipo": "etiqueta",
+      "pines": [
+        "g15"
+      ],
+      "nombre": "C"
+    },
+    {
+      "id": "L27",
+      "tipo": "etiqueta",
+      "pines": [
+        "d19"
+      ],
+      "nombre": "C"
+    },
+    {
+      "id": "L28",
+      "tipo": "etiqueta",
+      "pines": [
+        "d5"
+      ],
+      "nombre": "D"
+    },
+    {
+      "id": "L29",
+      "tipo": "etiqueta",
+      "pines": [
+        "g12"
+      ],
+      "nombre": "D"
+    },
+    {
+      "id": "L30",
+      "tipo": "etiqueta",
+      "pines": [
+        "d9"
+      ],
+      "nombre": "D"
+    },
+    {
+      "id": "L31",
+      "tipo": "etiqueta",
+      "pines": [
+        "g18"
+      ],
+      "nombre": "D"
+    },
+    {
+      "id": "L32",
+      "tipo": "etiqueta",
+      "pines": [
+        "d16"
+      ],
+      "nombre": "D"
+    },
+    {
+      "id": "L33",
+      "tipo": "etiqueta",
+      "pines": [
+        "g26"
+      ],
+      "nombre": "D"
+    },
+    {
+      "id": "L34",
+      "tipo": "etiqueta",
+      "pines": [
+        "g30"
+      ],
+      "nombre": "D"
+    },
+    {
+      "id": "L35",
+      "tipo": "etiqueta",
+      "pines": [
+        "d2"
+      ],
+      "nombre": "E"
+    },
+    {
+      "id": "L36",
+      "tipo": "etiqueta",
+      "pines": [
+        "d12"
+      ],
+      "nombre": "E"
+    },
+    {
+      "id": "L37",
+      "tipo": "etiqueta",
+      "pines": [
+        "g16"
+      ],
+      "nombre": "E"
+    },
+    {
+      "id": "L38",
+      "tipo": "etiqueta",
+      "pines": [
+        "g19"
+      ],
+      "nombre": "E"
+    },
+    {
+      "id": "L39",
+      "tipo": "etiqueta",
+      "pines": [
+        "g23"
+      ],
+      "nombre": "E"
+    },
+    {
+      "id": "L40",
+      "tipo": "etiqueta",
+      "pines": [
+        "d26"
+      ],
+      "nombre": "E"
+    },
+    {
+      "id": "L41",
+      "tipo": "etiqueta",
+      "pines": [
+        "d23"
+      ],
+      "nombre": "E"
+    },
+    {
+      "id": "L42",
+      "tipo": "etiqueta",
+      "pines": [
+        "g33"
+      ],
+      "nombre": "E"
+    },
+    {
+      "id": "L43",
+      "tipo": "etiqueta",
+      "pines": [
+        "d33"
+      ],
+      "nombre": "E"
+    },
+    {
+      "id": "L44",
+      "tipo": "etiqueta",
+      "pines": [
+        "d30"
+      ],
+      "nombre": "E"
+    },
+    {
+      "id": "L45",
+      "tipo": "etiqueta",
+      "pines": [
+        "g3"
+      ],
+      "nombre": "p1"
+    },
+    {
+      "id": "L46",
+      "tipo": "etiqueta",
+      "pines": [
+        "d20"
+      ],
+      "nombre": "p1"
+    },
+    {
+      "id": "L47",
+      "tipo": "etiqueta",
+      "pines": [
+        "d17"
+      ],
+      "nombre": "p1"
+    },
+    {
+      "id": "L48",
+      "tipo": "etiqueta",
+      "pines": [
+        "g22"
+      ],
+      "nombre": "p1"
+    },
+    {
+      "id": "L49",
+      "tipo": "etiqueta",
+      "pines": [
+        "g1@2"
+      ],
+      "nombre": "p1"
+    },
+    {
+      "id": "L50",
+      "tipo": "etiqueta",
+      "pines": [
+        "g6"
+      ],
+      "nombre": "p2"
+    },
+    {
+      "id": "L51",
+      "tipo": "etiqueta",
+      "pines": [
+        "g25"
+      ],
+      "nombre": "p2"
+    },
+    {
+      "id": "L52",
+      "tipo": "etiqueta",
+      "pines": [
+        "d27"
+      ],
+      "nombre": "p2"
+    },
+    {
+      "id": "L53",
+      "tipo": "etiqueta",
+      "pines": [
+        "g2@2"
+      ],
+      "nombre": "p2"
+    },
+    {
+      "id": "L54",
+      "tipo": "etiqueta",
+      "pines": [
+        "d7"
+      ],
+      "nombre": "p3"
+    },
+    {
+      "id": "L55",
+      "tipo": "etiqueta",
+      "pines": [
+        "d24"
+      ],
+      "nombre": "p3"
+    },
+    {
+      "id": "L56",
+      "tipo": "etiqueta",
+      "pines": [
+        "g5@2"
+      ],
+      "nombre": "p3"
+    },
+    {
+      "id": "L57",
+      "tipo": "etiqueta",
+      "pines": [
+        "d4"
+      ],
+      "nombre": "p4"
+    },
+    {
+      "id": "L58",
+      "tipo": "etiqueta",
+      "pines": [
+        "d5@2"
+      ],
+      "nombre": "p4"
+    },
+    {
+      "id": "L59",
+      "tipo": "etiqueta",
+      "pines": [
+        "g10"
+      ],
+      "nombre": "p5"
+    },
+    {
+      "id": "L60",
+      "tipo": "etiqueta",
+      "pines": [
+        "g29"
+      ],
+      "nombre": "p5"
+    },
+    {
+      "id": "L61",
+      "tipo": "etiqueta",
+      "pines": [
+        "g32"
+      ],
+      "nombre": "p5"
+    },
+    {
+      "id": "L62",
+      "tipo": "etiqueta",
+      "pines": [
+        "d2@2"
+      ],
+      "nombre": "p5"
+    },
+    {
+      "id": "L63",
+      "tipo": "etiqueta",
+      "pines": [
+        "g13"
+      ],
+      "nombre": "p6"
+    },
+    {
+      "id": "L64",
+      "tipo": "etiqueta",
+      "pines": [
+        "d34"
+      ],
+      "nombre": "p6"
+    },
+    {
+      "id": "L65",
+      "tipo": "etiqueta",
+      "pines": [
+        "g9@2"
+      ],
+      "nombre": "p6"
+    },
+    {
+      "id": "L66",
+      "tipo": "etiqueta",
+      "pines": [
+        "d14"
+      ],
+      "nombre": "p7"
+    },
+    {
+      "id": "L67",
+      "tipo": "etiqueta",
+      "pines": [
+        "g12@2"
+      ],
+      "nombre": "p7"
+    },
+    {
+      "id": "L68",
+      "tipo": "etiqueta",
+      "pines": [
+        "d11"
+      ],
+      "nombre": "p8"
+    },
+    {
+      "id": "L69",
+      "tipo": "etiqueta",
+      "pines": [
+        "d31"
+      ],
+      "nombre": "p8"
+    },
+    {
+      "id": "L70",
+      "tipo": "etiqueta",
+      "pines": [
+        "d12@2"
+      ],
+      "nombre": "p8"
+    },
+    {
+      "id": "L71",
+      "tipo": "etiqueta",
+      "pines": [
+        "g17"
+      ],
+      "nombre": "p9"
+    },
+    {
+      "id": "L72",
+      "tipo": "etiqueta",
+      "pines": [
+        "d9@2"
+      ],
+      "nombre": "p9"
+    },
+    {
+      "id": "L73",
+      "tipo": "etiqueta",
+      "pines": [
+        "g20"
+      ],
+      "nombre": "p10"
+    },
+    {
+      "id": "L74",
+      "tipo": "etiqueta",
+      "pines": [
+        "g16@2"
+      ],
+      "nombre": "p10"
+    },
+    {
+      "id": "L75",
+      "tipo": "etiqueta",
+      "pines": [
+        "d21"
+      ],
+      "nombre": "t1"
+    },
+    {
+      "id": "L76",
+      "tipo": "etiqueta",
+      "pines": [
+        "g18@2"
+      ],
+      "nombre": "t1"
+    },
+    {
+      "id": "L77",
+      "tipo": "etiqueta",
+      "pines": [
+        "d18"
+      ],
+      "nombre": "t2"
+    },
+    {
+      "id": "L78",
+      "tipo": "etiqueta",
+      "pines": [
+        "g19@2"
+      ],
+      "nombre": "t2"
+    },
+    {
+      "id": "L79",
+      "tipo": "etiqueta",
+      "pines": [
+        "g24"
+      ],
+      "nombre": "t3"
+    },
+    {
+      "id": "L80",
+      "tipo": "etiqueta",
+      "pines": [
+        "d19@2"
+      ],
+      "nombre": "t3"
+    },
+    {
+      "id": "L81",
+      "tipo": "etiqueta",
+      "pines": [
+        "g27"
+      ],
+      "nombre": "t4"
+    },
+    {
+      "id": "L82",
+      "tipo": "etiqueta",
+      "pines": [
+        "d16@2"
+      ],
+      "nombre": "t4"
+    },
+    {
+      "id": "L83",
+      "tipo": "etiqueta",
+      "pines": [
+        "d28"
+      ],
+      "nombre": "t5"
+    },
+    {
+      "id": "L84",
+      "tipo": "etiqueta",
+      "pines": [
+        "g23@2"
+      ],
+      "nombre": "t5"
+    },
+    {
+      "id": "L85",
+      "tipo": "etiqueta",
+      "pines": [
+        "d25"
+      ],
+      "nombre": "t6"
+    },
+    {
+      "id": "L86",
+      "tipo": "etiqueta",
+      "pines": [
+        "g26@2"
+      ],
+      "nombre": "t6"
+    },
+    {
+      "id": "L87",
+      "tipo": "etiqueta",
+      "pines": [
+        "g31"
+      ],
+      "nombre": "t7"
+    },
+    {
+      "id": "L88",
+      "tipo": "etiqueta",
+      "pines": [
+        "d26@2"
+      ],
+      "nombre": "t7"
+    },
+    {
+      "id": "L89",
+      "tipo": "etiqueta",
+      "pines": [
+        "g34"
+      ],
+      "nombre": "t8"
+    },
+    {
+      "id": "L90",
+      "tipo": "etiqueta",
+      "pines": [
+        "d23@2"
+      ],
+      "nombre": "t8"
+    },
+    {
+      "id": "L91",
+      "tipo": "etiqueta",
+      "pines": [
+        "d35"
+      ],
+      "nombre": "t9"
+    },
+    {
+      "id": "L92",
+      "tipo": "etiqueta",
+      "pines": [
+        "g30@2"
+      ],
+      "nombre": "t9"
+    },
+    {
+      "id": "L93",
+      "tipo": "etiqueta",
+      "pines": [
+        "d32"
+      ],
+      "nombre": "t10"
+    },
+    {
+      "id": "L94",
+      "tipo": "etiqueta",
+      "pines": [
+        "g33@2"
+      ],
+      "nombre": "t10"
+    },
+    {
+      "id": "L95",
+      "tipo": "etiqueta",
+      "pines": [
+        "g38"
+      ],
+      "nombre": "S"
+    },
+    {
+      "id": "L96",
+      "tipo": "etiqueta",
+      "pines": [
+        "g3@2"
+      ],
+      "nombre": "n1"
+    },
+    {
+      "id": "L97",
+      "tipo": "etiqueta",
+      "pines": [
+        "g4@2"
+      ],
+      "nombre": "n1"
+    },
+    {
+      "id": "L98",
+      "tipo": "etiqueta",
+      "pines": [
+        "g6@2"
+      ],
+      "nombre": "n2"
+    },
+    {
+      "id": "L99",
+      "tipo": "etiqueta",
+      "pines": [
+        "d6@2"
+      ],
+      "nombre": "n2"
+    },
+    {
+      "id": "L100",
+      "tipo": "etiqueta",
+      "pines": [
+        "d7@2"
+      ],
+      "nombre": "n3"
+    },
+    {
+      "id": "L101",
+      "tipo": "etiqueta",
+      "pines": [
+        "d3@2"
+      ],
+      "nombre": "n3"
+    },
+    {
+      "id": "L102",
+      "tipo": "etiqueta",
+      "pines": [
+        "d4@2"
+      ],
+      "nombre": "n4"
+    },
+    {
+      "id": "L103",
+      "tipo": "etiqueta",
+      "pines": [
+        "g8@2"
+      ],
+      "nombre": "n4"
+    },
+    {
+      "id": "L104",
+      "tipo": "etiqueta",
+      "pines": [
+        "g10@2"
+      ],
+      "nombre": "n5"
+    },
+    {
+      "id": "L105",
+      "tipo": "etiqueta",
+      "pines": [
+        "g11@2"
+      ],
+      "nombre": "n5"
+    },
+    {
+      "id": "L106",
+      "tipo": "etiqueta",
+      "pines": [
+        "g13@2"
+      ],
+      "nombre": "n6"
+    },
+    {
+      "id": "L107",
+      "tipo": "etiqueta",
+      "pines": [
+        "d13@2"
+      ],
+      "nombre": "n6"
+    },
+    {
+      "id": "L108",
+      "tipo": "etiqueta",
+      "pines": [
+        "d14@2"
+      ],
+      "nombre": "n7"
+    },
+    {
+      "id": "L109",
+      "tipo": "etiqueta",
+      "pines": [
+        "d10@2"
+      ],
+      "nombre": "n7"
+    },
+    {
+      "id": "L110",
+      "tipo": "etiqueta",
+      "pines": [
+        "d11@2"
+      ],
+      "nombre": "n8"
+    },
+    {
+      "id": "L111",
+      "tipo": "etiqueta",
+      "pines": [
+        "g15@2"
+      ],
+      "nombre": "n8"
+    },
+    {
+      "id": "L112",
+      "tipo": "etiqueta",
+      "pines": [
+        "g17@2"
+      ],
+      "nombre": "P"
+    },
+    {
+      "id": "L113",
+      "tipo": "etiqueta",
+      "pines": [
+        "g36"
+      ],
+      "nombre": "P"
+    },
+    {
+      "id": "L114",
+      "tipo": "etiqueta",
+      "pines": [
+        "g43"
+      ],
+      "nombre": "P"
+    },
+    {
+      "id": "L115",
+      "tipo": "etiqueta",
+      "pines": [
+        "g20@2"
+      ],
+      "nombre": "m1"
+    },
+    {
+      "id": "L116",
+      "tipo": "etiqueta",
+      "pines": [
+        "d20@2"
+      ],
+      "nombre": "m1"
+    },
+    {
+      "id": "L117",
+      "tipo": "etiqueta",
+      "pines": [
+        "d21@2"
+      ],
+      "nombre": "m2"
+    },
+    {
+      "id": "L118",
+      "tipo": "etiqueta",
+      "pines": [
+        "d17@2"
+      ],
+      "nombre": "m2"
+    },
+    {
+      "id": "L119",
+      "tipo": "etiqueta",
+      "pines": [
+        "d18@2"
+      ],
+      "nombre": "m3"
+    },
+    {
+      "id": "L120",
+      "tipo": "etiqueta",
+      "pines": [
+        "g22@2"
+      ],
+      "nombre": "m3"
+    },
+    {
+      "id": "L121",
+      "tipo": "etiqueta",
+      "pines": [
+        "g24@2"
+      ],
+      "nombre": "m4"
+    },
+    {
+      "id": "L122",
+      "tipo": "etiqueta",
+      "pines": [
+        "g25@2"
+      ],
+      "nombre": "m4"
+    },
+    {
+      "id": "L123",
+      "tipo": "etiqueta",
+      "pines": [
+        "g27@2"
+      ],
+      "nombre": "m5"
+    },
+    {
+      "id": "L124",
+      "tipo": "etiqueta",
+      "pines": [
+        "d27@2"
+      ],
+      "nombre": "m5"
+    },
+    {
+      "id": "L125",
+      "tipo": "etiqueta",
+      "pines": [
+        "d28@2"
+      ],
+      "nombre": "m6"
+    },
+    {
+      "id": "L126",
+      "tipo": "etiqueta",
+      "pines": [
+        "d24@2"
+      ],
+      "nombre": "m6"
+    },
+    {
+      "id": "L127",
+      "tipo": "etiqueta",
+      "pines": [
+        "d25@2"
+      ],
+      "nombre": "m7"
+    },
+    {
+      "id": "L128",
+      "tipo": "etiqueta",
+      "pines": [
+        "g29@2"
+      ],
+      "nombre": "m7"
+    },
+    {
+      "id": "L129",
+      "tipo": "etiqueta",
+      "pines": [
+        "g31@2"
+      ],
+      "nombre": "m8"
+    },
+    {
+      "id": "L130",
+      "tipo": "etiqueta",
+      "pines": [
+        "g32@2"
+      ],
+      "nombre": "m8"
+    },
+    {
+      "id": "L131",
+      "tipo": "etiqueta",
+      "pines": [
+        "g34@2"
+      ],
+      "nombre": "T"
+    },
+    {
+      "id": "L132",
+      "tipo": "etiqueta",
+      "pines": [
+        "d33@2"
+      ],
+      "nombre": "T"
+    },
+    {
+      "id": "L133",
+      "tipo": "etiqueta",
+      "pines": [
+        "g45"
+      ],
+      "nombre": "T"
+    },
+    {
+      "id": "L134",
+      "tipo": "etiqueta",
+      "pines": [
+        "d35@2"
+      ],
+      "nombre": "S2"
+    },
+    {
+      "id": "L135",
+      "tipo": "etiqueta",
+      "pines": [
+        "g44"
+      ],
+      "nombre": "F"
+    },
+    {
+      "id": "L136",
+      "tipo": "etiqueta",
+      "pines": [
+        "d34@2"
+      ],
+      "nombre": "F"
+    },
+    {
+      "id": "L137",
+      "tipo": "etiqueta",
+      "pines": [
+        "g46"
+      ],
+      "nombre": "Tb"
+    },
+    {
+      "id": "L138",
+      "tipo": "etiqueta",
+      "pines": [
+        "g37"
+      ],
+      "nombre": "Tb"
+    },
+    {
+      "id": "L139",
+      "tipo": "etiqueta",
+      "pines": [
+        "g39"
+      ],
+      "nombre": "GND"
+    },
+    {
+      "id": "L140",
+      "tipo": "etiqueta",
+      "pines": [
+        "g40"
+      ],
+      "nombre": "GND"
+    },
+    {
+      "id": "L141",
+      "tipo": "etiqueta",
+      "pines": [
+        "d41"
+      ],
+      "nombre": "GND"
+    },
+    {
+      "id": "L142",
+      "tipo": "etiqueta",
+      "pines": [
+        "d40"
+      ],
+      "nombre": "GND"
+    },
+    {
+      "id": "L143",
+      "tipo": "etiqueta",
+      "pines": [
+        "d38"
+      ],
+      "nombre": "GND"
+    },
+    {
+      "id": "L144",
+      "tipo": "etiqueta",
+      "pines": [
+        "d37"
+      ],
+      "nombre": "GND"
+    },
+    {
+      "id": "L145",
+      "tipo": "etiqueta",
+      "pines": [
+        "d31@2"
+      ],
+      "nombre": "GND"
+    },
+    {
+      "id": "L146",
+      "tipo": "etiqueta",
+      "pines": [
+        "d30@2"
+      ],
+      "nombre": "GND"
+    },
+    {
+      "id": "L147",
+      "tipo": "etiqueta",
+      "pines": [
+        "g47"
+      ],
+      "nombre": "GND"
+    },
+    {
+      "id": "L148",
+      "tipo": "etiqueta",
+      "pines": [
+        "d48"
+      ],
+      "nombre": "GND"
+    },
+    {
+      "id": "L149",
+      "tipo": "etiqueta",
+      "pines": [
+        "d46"
+      ],
+      "nombre": "GND"
+    },
+    {
+      "id": "L150",
+      "tipo": "etiqueta",
+      "pines": [
+        "d44"
+      ],
+      "nombre": "GND"
+    },
+    {
+      "id": "L151",
+      "tipo": "etiqueta",
+      "pines": [
+        "b-1"
+      ],
+      "nombre": "GND"
+    }
+  ]
+}

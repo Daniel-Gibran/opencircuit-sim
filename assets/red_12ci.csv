@@ -1,0 +1,48 @@
+red,funcion,driver,consumidores
+A,entrada,interruptor / pull-down,U1A pin 1 U1B pin 4 U1C pin 9 U1D pin 12
+B,entrada,interruptor / pull-down,U1A pin 2 U2A pin 1 U2B pin 4 U2C pin 9
+C,entrada,interruptor / pull-down,U1B pin 5 U2A pin 2 U2D pin 12 U3A pin 1 U3C pin 10
+D,entrada,interruptor / pull-down,U1C pin 10 U2B pin 5 U2D pin 13 U3B pin 4 U3D pin 13 U4B pin 5 U5A pin 2
+E,entrada,interruptor / pull-down,U1D pin 13 U2C pin 10 U3A pin 2 U3B pin 5 U4A pin 2 U4C pin 10 U4D pin 13 U5B pin 5 U5C pin 10 U5D pin 13
+p1,p1 = A·B,U1A pin 3,U3C pin 9 U3D pin 12 U4A pin 1 U9A pin 1
+p2,p2 = A·C,U1B pin 6,U4B pin 4 U4C pin 9 U9A pin 2
+p3,p3 = A·D,U1C pin 8,U4D pin 12 U9B pin 5
+p4,p4 = A·E,U1D pin 11,U9C pin 10
+p5,p5 = B·C,U2A pin 3,U5A pin 1 U5B pin 4 U9D pin 13
+p6,p6 = B·D,U2B pin 6,U5C pin 9 U10A pin 2
+p7,p7 = B·E,U2C pin 8,U10B pin 5
+p8,p8 = C·D,U2D pin 11,U5D pin 12 U10C pin 10
+p9,p9 = C·E,U3A pin 3,U10D pin 13
+p10,p10 = D·E,U3B pin 6,U11A pin 2
+t1,t1 = p1·C,U3C pin 8,U11B pin 4
+t2,t2 = p1·D,U3D pin 11,U11B pin 5
+t3,t3 = p1·E,U4A pin 3,U11C pin 10
+t4,t4 = p2·D,U4B pin 6,U11D pin 13
+t5,t5 = p2·E,U4C pin 8,U12A pin 2
+t6,t6 = p3·E,U4D pin 11,U12B pin 5
+t7,t7 = p5·D,U5A pin 3,U12C pin 10
+t8,t8 = p5·E,U5B pin 6,U12D pin 13
+t9,t9 = p6·E,U5C pin 8,U13A pin 2
+t10,t10 = p8·E,U5D pin 11,U13B pin 5
+S,S = P·Tb,U6A pin 3,
+n1,n1 = p1+p2,U9A pin 3,U9B pin 4
+n2,n2 = n1+p3,U9B pin 6,U9C pin 9
+n3,n3 = n2+p4,U9C pin 8,U9D pin 12
+n4,n4 = n3+p5,U9D pin 11,U10A pin 1
+n5,n5 = n4+p6,U10A pin 3,U10B pin 4
+n6,n6 = n5+p7,U10B pin 6,U10C pin 9
+n7,n7 = n6+p8,U10C pin 8,U10D pin 12
+n8,n8 = n7+p9,U10D pin 11,U11A pin 1
+P,P = n8+p10,U11A pin 3,U6A pin 1 U14A pin 1
+m1,m1 = t1+t2,U11B pin 6,U11C pin 9
+m2,m2 = m1+t3,U11C pin 8,U11D pin 12
+m3,m3 = m2+t4,U11D pin 11,U12A pin 1
+m4,m4 = m3+t5,U12A pin 3,U12B pin 4
+m5,m5 = m4+t6,U12B pin 6,U12C pin 9
+m6,m6 = m5+t7,U12C pin 8,U12D pin 12
+m7,m7 = m6+t8,U12D pin 11,U13A pin 1
+m8,m8 = m7+t9,U13A pin 3,U13B pin 4
+T,T = m8+t10,U13B pin 6,U13C pin 10 U14B pin 3
+S2,S2 = F+T,U13C pin 8,
+F,F = P',U14A pin 2,U13C pin 9
+Tb,Tb = T',U14B pin 4,U6A pin 2
